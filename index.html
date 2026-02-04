@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUN BRASIL - Comunidade e Segurança</title>
+    <!-- Fonte Inter para um visual moderno e limpo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variáveis de cor para fácil manutenção */
+        :root {
+            --primary: #FFC107; /* Amarelo Dourado */
+            --primary-hover: #FFD54F;
+            --dark-bg: #121212;
+            --dark-surface: #1E1E1E;
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
+            --border-color: #333333;
+        }
+
+        /* Reset básico e configurações globais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Classes utilitárias */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--dark-bg);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        /* Menu Mobile */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--dark-bg) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Sobre */
+        .about {
+            padding: 80px 0;
+            background-color: var(--dark-surface);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .about-image {
+            background: linear-gradient(45deg, var(--primary), transparent);
+            height: 400px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .about-image::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background-color: var(--dark-surface);
+            border-radius: 10px;
+        }
+
+        /* Serviços */
+        .services {
+            padding: 100px 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--dark-surface);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Segurança */
+        .security {
+            padding: 100px 0;
+            background-color: var(--dark-surface);
+            text-align: center;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .security-item {
+            padding: 2rem;
+            border-left: 3px solid var(--primary);
+            background-color: rgba(255, 193, 7, 0.05);
+        }
+
+        /* Regras */
+        .rules {
+            padding: 80px 0;
+        }
+
+        .rules-list {
+            max-width: 800px;
+            margin: 0 auto;
+            counter-reset: rule-counter;
+        }
+
+        .rules-list li {
+            background-color: var(--dark-surface);
+            margin-bottom: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+        }
+
+        .rules-list li::before {
+            counter-increment: rule-counter;
+            content: counter(rule-counter);
+            background-color: var(--primary);
+            color: var(--dark-bg);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Comunidade */
+        .community {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(to top, var(--dark-surface), var(--dark-bg));
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--primary);
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+        }
+
+        /* CTA Final */
+        .cta-final {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--primary);
+            color: var(--dark-bg);
+        }
+
+        .cta-final h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-bg);
+        }
+
+        .cta-final p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-weight: 500;
+        }
+
+        .btn-dark {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            padding: 15px 35px;
+        }
+
+        .btn-dark:hover {
+            background-color: #000;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--dark-bg);
+                flex-direction: column;
+                padding: 2rem;
+                transition: 0.3s;
+                align-items: center;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .about-content, .security-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">SUN BRASIL</a>
+            
+            <div class="mobile-toggle" id="mobile-btn">
+                ☰
+            </div>
+
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#inicio" class="nav-link">Início</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="#regras" class="nav-link">Regras</a></li>
+                    <li><a href="#comunidade" class="nav-link">Comunidade</a></li>
+                    <li><a href="https://discord.gg/SBA4AAnugS" class="btn btn-primary">Entrar no Discord</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>O lugar certo para <br><span>negociar com segurança</span></h1>
+            <p>Não arrisque suas trocas. Junte-se a uma comunidade que valoriza a transparência e oferece suporte real para suas vendas e interações.</p>
+            <a href="https://discord.gg/SBA4AAnugS" class="btn btn-primary" style="font-size: 1.1rem; padding: 15px 40px;">Entrar no Servidor</a>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="about" id="sobre">
+        <div class="container about-content">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align: left;">Quem somos?</h2>
+                <p>O SUN BRASIL nasceu de uma necessidade simples: ter um espaço onde as pessoas pudessem conversar e negociar sem o medo constante de levar um golpe.</p>
+                <p>Nós não somos apenas mais um servidor de vendas. Somos uma comunidade ativa, onde a staff realmente se importa se você está tendo uma boa experiência ou não. Aqui, a gente preza pelo "papel preto no branco". As coisas precisam ser claras.</p>
+                <p>Se você busca um ambiente organizado, com gente de verdade e regras que funcionam, você encontrou seu lugar.</p>
+            </div>
+            <div class="about-image">
+                <!-- Elemento visual abstrato criado com CSS puro -->
+                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text-muted); font-size: 1.2rem; text-align: center;">
+                    <span style="color: var(--primary); font-size: 3rem; display: block; margin-bottom: 10px;">🛡️</span>
+                    Comunidade Verificada
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <h2 class="section-title">O que oferecemos</h2>
+            <p class="section-subtitle">Tudo o que você precisa para interagir e negociar sem dor de cabeça.</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🤝</div>
+                    <h3>Middleman (MM)</h3>
+                    <p>Nosso serviço de intermediação garante que ninguém saia perdendo. Um staff acompanha toda a transação do início ao fim.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📢</div>
+                    <h3>Sistema de Vendas</h3>
+                    <p>Canais organizados para você anunciar seus produtos. Nada de spam ou bagunça, aqui seu anúncio é visto por quem interessa.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💬</div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Chat geral sempre movimentado. Ótimo para fazer amizades, tirar dúvidas ou apenas jogar conversa fora.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔰</div>
+                    <h3>Suporte Dedicado</h3>
+                    <p>Teve um problema? Nossa equipe de suporte não é robô. Pessoas reais vão analisar seu caso e ajudar a resolver.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Segurança -->
+    <section class="security" id="seguranca">
+        <div class="container">
+            <h2 class="section-title">Segurança em Primeiro Lugar</h2>
+            <p class="section-subtitle">Entenda por que o SUN BRASIL é referência em confiança.</p>
+
+            <div class="security-grid">
+                <div class="security-item">
+                    <h3>Zero Tolerância</h3>
+                    <p>Tentou passar a perna em alguém? É ban. Não damos segundas chances para golpistas. Mantemos a lista de banimentos atualizada para proteger nossos membros.</p>
+                </div>
+                <div class="security-item">
+                    <h3>Intermediação Oficial</h3>
+                    <p>Nunca negocie "no escuro". Use nossos intermediadores oficiais. Eles seguram o item/dinheiro até que ambas as partes cumpram o combinado.</p>
+                </div>
+                <div class="security-item">
+                    <h3>Transparência</h3>
+                    <p>Todas as regras e taxas são visíveis. Você nunca vai ser pego de surpresa com uma cobrança ou regra inventada na hora.</p>
+                </div>
+                <div class="security-item">
+                    <h3>Referências</h3>
+                    <p>Temos um sistema de reputação onde você pode conferir o histórico de quem está negociando com você.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regras -->
+    <section class="rules" id="regras">
+        <div class="container">
+            <h2 class="section-title">Regras Essenciais</h2>
+            <p class="section-subtitle">Para manter a casa em ordem, pedimos o básico:</p>
+            
+            <ul class="rules-list">
+                <li>
+                    <div>
+                        <strong>Respeito é a base</strong>
+                        <p>Trate os outros como gostaria de ser tratado. Sem toxicidade, discurso de ódio ou brigas desnecessárias.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Honestidade nas trocas</strong>
+                        <p>Se prometeu, cumpra. Tentar enganar, ocultar defeitos ou dar calote resulta em banimento imediato.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Sem Spam</strong>
+                        <p>Divulgue seus produtos nos canais certos. Ninguém gosta de ver a mesma mensagem 50 vezes no chat geral.</p>
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <strong>Siga as instruções da Staff</strong>
+                        <p>Nossos administradores estão aqui para ajudar. Se um staff pediu para parar, pare. Simples assim.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Comunidade -->
+    <section class="community" id="comunidade">
+        <div class="container">
+            <h2 class="section-title">Faça parte disso</h2>
+            <p>Mais do que números, somos pessoas conectadas.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>+10k</h3>
+                    <p>Membros Ativos</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24h</h3>
+                    <p>Suporte Disponível</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Segurança Focada</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>Está esperando o quê?</h2>
+            <p style="color: rgba(0,0,0,0.7);">Venha fazer parte do SUN BRASIL agora mesmo. É grátis, é seguro e você vai curtir.</p>
+            <a href="https://discord.gg/SBA4AAnugS" class="btn btn-dark">Entrar no SUN BRASIL</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#inicio">Início</a>
+                <a href="#servicos">Serviços</a>
+                <a href="#regras">Regras</a>
+                <a href="https://discord.gg/SBA4AAnugS">Discord</a>
+            </div>
+            <p class="logo" style="font-size: 1.2rem; margin-bottom: 1rem;">SUN BRASIL</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+                Uma comunidade independente focada em segurança e boas conexões.<br>
+                Não somos afiliados a nenhuma empresa de jogos.
+            </p>
+            <br>
+            <small style="color: #444;">&copy; 2026 SUN BRASIL. Todos os direitos reservados.</small>
+        </div>
+    </footer>
+
+    <script>
+        // Script simples para o menu mobile
+        // Nada complexo, apenas funcionalidade básica para melhorar a UX em celulares
+        
+        const mobileBtn = document.getElementById('mobile-btn');
+        const navMenu = document.getElementById('nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // Alternar menu ao clicar no botão
+        mobileBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            // Muda o ícone de hambúrguer para X e vice-versa (simples visual)
+            if(navMenu.classList.contains('active')) {
+                mobileBtn.innerHTML = '✕';
+            } else {
+                mobileBtn.innerHTML = '☰';
+            }
+        });
+
+        // Fechar o menu ao clicar em qualquer link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileBtn.innerHTML = '☰';
+            });
+        });
+
+        // Efeito de scroll suave para links internos (compatibilidade extra)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // Offset para compensar o header fixo
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
